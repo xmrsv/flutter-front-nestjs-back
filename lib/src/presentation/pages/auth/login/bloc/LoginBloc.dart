@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _onInitEvent(InitEvent event, Emitter<LoginState> emit) async {
     AuthResponse? authResponse = await authUseCases.getUserSession.run();
     emit(state.copyWith(formKey: formKey));
-    print("usuario en sessio: ${authResponse?.toJson()}");
+    print("Usuario en session: ${authResponse?.toJson()}");
     if (authResponse != null) {
       emit(state.copyWith(response: Success(authResponse), formKey: formKey));
     }
@@ -44,8 +44,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
         password: BlocFormItem(
             value: event.password.value,
-            error:
-                event.password.value.isNotEmpty ? null : 'Ingresa el password'),
+            error: event.password.value.isNotEmpty ? 
+              null : 'Ingresa el password'),
         formKey: formKey));
   }
 
@@ -55,8 +55,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.copyWith(response: Loading(), formKey: formKey),
     );
     await Future.delayed(Duration(seconds: 6));
-    Resource response =
-        await authUseCases.login.run(state.email.value, state.password.value);
+    Resource response = await authUseCases
+      .login.run(state.email.value, state.password.value);
     emit(state.copyWith(response: response, formKey: formKey));
   }
 

@@ -164,7 +164,8 @@ class RegisterContent extends StatelessWidget {
         label: 'Repetir Contraseña',
         icon: Icons.lock_outline,
         onChange: (text) {
-          bloc?.add(RepeatPasswordChanged(repassword: BlocFormItem(value: text)));
+          bloc?.add(
+              RepeatPasswordChanged(repassword: BlocFormItem(value: text)));
         },
         obscureText: true,
         validator: (value) {
@@ -179,16 +180,17 @@ class RegisterContent extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
       child: ElevatedButton(
-          onPressed: () {
-            if (state.formKey!.currentState!.validate()) {
-              bloc!.add(RegisterSubmit());
-            }
-          },
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-          child: Text(
-            'Registrarse',
-            style: TextStyle(color: Colors.white),
-          )),
+        onPressed: () {
+          if (state.formKey!.currentState!.validate()) {
+            bloc!.add(RegisterSubmit());
+          }
+        },
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+        child: Text(
+          'Registrarse',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     );
   }
 }

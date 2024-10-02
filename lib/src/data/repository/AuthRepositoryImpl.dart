@@ -9,6 +9,7 @@ import 'package:demo_view_shopify/src/domain/utils/Resource.dart';
 class AuthRepositoryImpl implements AuthRepository {
   AuthServices authServices;
   SharedPref sharedPref;
+
   AuthRepositoryImpl(this.authServices, this.sharedPref);
 
   @override
@@ -27,8 +28,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<bool> logout() {
-    throw UnimplementedError();
+  Future<bool> logout() async {
+    return await sharedPref.remove('user');
   }
 
   @override

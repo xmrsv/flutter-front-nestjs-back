@@ -15,14 +15,15 @@ class DefaultIconBack extends StatelessWidget {
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(left: left, top: top),
       child: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            size: 50,
-            color: Colors.black,
-          )),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 50,
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }

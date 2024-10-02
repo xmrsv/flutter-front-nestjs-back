@@ -1,4 +1,3 @@
-// lib/Injection.config.dart
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************

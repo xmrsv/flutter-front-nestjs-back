@@ -1,6 +1,5 @@
 // lib/src/presentation/pages/auth/register/bloc/RegisterBloc.dart
 import 'package:demo_view_shopify/src/domain/models/AuthResponse.dart';
-import 'package:demo_view_shopify/src/domain/models/User.dart';
 import 'package:demo_view_shopify/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:demo_view_shopify/src/domain/utils/Resource.dart';
 import 'package:demo_view_shopify/src/presentation/pages/auth/register/bloc/RegisterEvent.dart';

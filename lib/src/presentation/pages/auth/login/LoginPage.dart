@@ -30,40 +30,45 @@ class _LoginPageState extends State<LoginPage> {
     _bloc = BlocProvider.of<LoginBloc>(context);
 
     return Scaffold(
-        body: Container(
-      width: double.infinity,
-      child: BlocListener<LoginBloc, LoginState>(listener: (context, state) {
-        final responseState = state.response;
-        if (responseState is Error) {
-          Fluttertoast.showToast(
-              msg: responseState.message, toastLength: Toast.LENGTH_LONG);
-        } else if (responseState is Success) {
-          final authResponse = responseState.data as AuthResponse;
-          //_bloc?.add(LoginFormReset());
-        _bloc?.add(LoginSaveSession(authResponse: authResponse));
-          Fluttertoast.showToast(
-              msg: 'Login exitoso',
-              toastLength: Toast.LENGTH_LONG); //toas de testeo
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            Navigator.pushNamedAndRemoveUntil(
-                context,
-                'client/home',
-                (route) =>
-                    false); //enviar a la pagina de roles, despues de guardar el usuario
-          });
-        }
-      }, child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-        final responseState = state.response;
-        if (responseState is Loading) {
-          return Stack(
-            children: [
-              LoginContent(_bloc, state),
-              Center(child: CircularProgressIndicator())
-            ],
-          );
-        }
-        return LoginContent(_bloc, state);
-      })),
-    ));
+      body: Container(
+        width: double.infinity,
+        child: BlocListener<LoginBloc, LoginState>(
+          listener: (context, state) {
+            final responseState = state.response;
+            if (responseState is Error) {
+              Fluttertoast.showToast(
+                  msg: responseState.message, toastLength: Toast.LENGTH_LONG);
+            } else if (responseState is Success) {
+              final authResponse = responseState.data as AuthResponse;
+              //_bloc?.add(LoginFormReset());
+              _bloc?.add(LoginSaveSession(authResponse: authResponse));
+              Fluttertoast.showToast(
+                  msg: 'Login exitoso',
+                  toastLength: Toast.LENGTH_LONG); // Toast para pruebas
+              WidgetsBinding.instance.addPostFrameCallback(
+                (timeStamp) {
+                  Navigator.pushNamedAndRemoveUntil(context, 'client/home',
+                      (route) => false); // Envia a la pagina de roles
+                },
+              );
+            }
+          },
+          child: BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              final responseState = state.response;
+              if (responseState is Loading) {
+                return Stack(
+                  children: [
+                    LoginContent(_bloc, state),
+                    Center(child: CircularProgressIndicator())
+                  ],
+                );
+              }
+              return LoginContent(_bloc, state);
+            },
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -7,13 +7,14 @@ import 'package:demo_view_shopify/src/domain/repository/AuthRepository.dart';
 import 'package:demo_view_shopify/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:demo_view_shopify/src/domain/useCases/auth/GetUserSessionUseCase.dart';
 import 'package:demo_view_shopify/src/domain/useCases/auth/LoginUseCase.dart';
+import 'package:demo_view_shopify/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:demo_view_shopify/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:demo_view_shopify/src/domain/useCases/auth/SaveUserSessionUseCase.dart';
 import 'package:injectable/injectable.dart';
 
 @module
 abstract class AppModule {
-  //SHARED PREFERENCES
+  // SharedPreferences
   @injectable
   SharedPref get sharedPref => SharedPref();
 
@@ -28,19 +29,20 @@ abstract class AppModule {
     return token;
   }
 
-  //SERVICE AUTH
+  // Auth service
   @injectable
   AuthServices get authServices => AuthServices();
 
-  //SERVICE REPOSITORY
+  // Repository service
   @injectable
   AuthRepository get authRepository =>
       AuthRepositoryImpl(authServices, sharedPref);
 
-  //USECASES AUTH
+  // Auth use cases
   @injectable
   AuthUseCases get authUseCases => AuthUseCases(
       login: LoginUseCase(authRepository),
+      logout: LogoutUseCase(authRepository),
       register: RegisterUseCase(authRepository),
       getUserSession: GetUserSessionUseCase(authRepository),
       saveUserSession: SaveUserSessionUseCase(authRepository));
